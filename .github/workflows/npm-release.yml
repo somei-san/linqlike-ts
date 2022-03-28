@@ -1,0 +1,55 @@
+name: "NPM-RELEASE"
+
+on:
+  push:
+    branches:
+      - npm-release
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_USERNAME: リリースを通知君
+  SLACK_ICON: https://example.com/image/icon_bot.png # 404でも画像なしになるだけで怒られない 20220222
+
+jobs:
+  publish:
+    name: "npm-release"
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: node install
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+          registry-url: "https://registry.npmjs.org"
+      - name: setup dependencies
+        run: npm ci
+      - name: run test
+        run: npm run test
+      - name: build
+        run: npm run build
+      - name: exe publish
+        run: npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      #-- Slack通知 -- [参照](https://blog.katsubemakito.net/git/github-actions-slack) #
+      # 成功
+      - name: notice for slack on SUCCESS
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy SUCCESS !! We love we all 💕
+          SLACK_COLOR: good
+      # 失敗
+      - name: notice for slack on FAILURE
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy FAILURE... I hate you 💀
+          SLACK_COLOR: danger
