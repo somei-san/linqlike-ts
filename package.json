@@ -1,0 +1,30 @@
+{
+  "name": "@goya_yellow/linqlike-ts",
+  "version": "0.0.0",
+  "description": "functions like LINQ for TypeScript",
+  "main": "index.js",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goyaYellow/linqlike-ts.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goyaYellow/linqlike-ts/issues"
+  },
+  "homepage": "https://github.com/goyaYellow/linqlike-ts#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3"
+  }
+}
