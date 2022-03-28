@@ -1,4 +1,4 @@
-import "./linq";
+import "../lib/linq";
 
 var list = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1];
 
@@ -15,11 +15,11 @@ try {
   console.log("れいがいだよ！" + e);
 }
 
-class Sample {
+type Sample = {
   value: number;
-}
+};
 
-var test1: Sample;
-var test2: Sample;
+var test1: Sample = { value: 1 };
+var test2: Sample = { value: 2 };
 
-if (test1 == test2) throw new Error("sada");
+if (test1 == test2) throw new Error("");
