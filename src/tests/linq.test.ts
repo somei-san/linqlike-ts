@@ -1,5 +1,12 @@
 import "../lib/linq";
 
+test(`インスタンス化できる!`, () => {
+  var list = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1];
+
+  expect(list.only((x) => x === 9)).toBe(true);
+});
+
+
 var list = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1];
 
 console.log(list);
