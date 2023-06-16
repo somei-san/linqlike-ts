@@ -16,7 +16,7 @@ console.log(list.find((x) => x == 50));
 console.log(list.every((x) => x < 20));
 
 try {
-  console.log(list.only((x) => x == 1));
+  console.log(list.single((x) => x == 1));
 } catch (e) {
   console.log("れいがいだよ！" + e);
 }

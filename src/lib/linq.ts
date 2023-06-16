@@ -10,7 +10,9 @@ declare global {
      * @return {*}  {T}
      * @memberof Array
      */
-    only<T>(predicate: (arg: T) => boolean): T;
+    single<T>(predicate: (arg: T) => boolean): T;
+
+    singleOrNull<T>(predicate: (arg: T) => boolean): T|null;
 
     /** Returns the first element that satisfies the predicate */
     first(predicate: (element: T) => boolean): T;
@@ -19,7 +21,7 @@ declare global {
   }
 }
 
-Array.prototype.only = function <T>(predicate: (element: T) => boolean): T {
+Array.prototype.single = function <T>(predicate: (element: T) => boolean): T {
   const source = this as T[];
 
   const matched = source.filter((x) => predicate(x));
@@ -29,6 +31,16 @@ Array.prototype.only = function <T>(predicate: (element: T) => boolean): T {
   if (matched.length >= 2) throw Error("該当する値が複数あります");
 
   return matched[0];
+};
+
+Array.prototype.singleOrNull = function <T>(predicate: (element: T) => boolean): T|null {
+  const source = this as T[];
+
+  const matched = source.filter((x) => predicate(x));
+
+  if (matched.length == 1) return matched[0];
+
+  return null;
 };
 
 Array.prototype.first = function <T>(predicate: (element: T) => boolean): T {
