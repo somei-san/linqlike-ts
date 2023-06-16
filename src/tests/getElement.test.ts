@@ -1,4 +1,4 @@
-import "../lib/linq";
+import "../lib/getElement";
 
 test(`インスタンス化できる!`, () => {
   var list = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1];

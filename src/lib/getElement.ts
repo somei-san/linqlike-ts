@@ -12,7 +12,15 @@ declare global {
      */
     single<T>(predicate: (arg: T) => boolean): T;
 
-    singleOrNull<T>(predicate: (arg: T) => boolean): T|null;
+    /**
+     * 渡された条件に一致する要素が一つの場合その要素を返します。
+     * 該当なし or ２つ以上の場合はnullを返します
+     * @template T
+     * @param {(arg: T) => boolean} predicate
+     * @return {*}  {T}
+     * @memberof Array
+     */
+    singleOrNull<T>(predicate: (arg: T) => boolean): T | null;
 
     /** Returns the first element that satisfies the predicate */
     first(predicate: (element: T) => boolean): T;
@@ -33,7 +41,9 @@ Array.prototype.single = function <T>(predicate: (element: T) => boolean): T {
   return matched[0];
 };
 
-Array.prototype.singleOrNull = function <T>(predicate: (element: T) => boolean): T|null {
+Array.prototype.singleOrNull = function <T>(
+  predicate: (element: T) => boolean
+): T | null {
   const source = this as T[];
 
   const matched = source.filter((x) => predicate(x));
